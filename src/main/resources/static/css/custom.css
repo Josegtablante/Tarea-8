@@ -1,0 +1,72 @@
+:root {
+    --primary: #111B54;
+    --light: rgb(240, 239, 239);
+    --grey: #efefef;
+}
+
+
+body {
+    overflow: hidden;
+    font-family: 'Muli', sans-serif;
+    font-weight: 300;
+    color: var(--primary);
+}
+
+#sidebar-container {
+    min-height: 100vh;
+    background-color: var(--primary) !important
+}
+
+#sidebar-container .logo {
+    padding: .875rem, 1.25rem;
+}
+
+#sidebar-container .menu {
+    width: 18rem;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+/* navbar */
+
+#navbarSupportedContent {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+}
+
+.lupaBuscar {
+    right: 5px;
+}
+
+
+/* contenido */
+
+#content{
+    display: flex;
+    overflow-y: auto;
+    height: 100vh;
+    padding-bottom: 5rem;
+    flex-direction: column;
+}
+
+.stat {
+    border-right: 1px solid var(--primary);
+}
+
+.bg-mix {
+     background: linear-gradient(180deg, var(--light) 50%, var(--grey) 0);
+}
+
+.cardPrestamos{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+

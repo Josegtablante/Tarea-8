@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- iconos -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Mulish:wght@300;700&family=Quicksand:wght@300;400&display=swap"
+        rel="stylesheet">
+    <!-- css -->
+    <link href="../css/createCard.css" rel="stylesheet">
+    <title>HomeBanking</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="mainscreen">
+            <!-- <img src="https://image.freepik.com/free-vector/purple-background-with-neon-frame_52683-34124.jpg"  class="bgimg " alt=""> -->
+            <div class="card">
+                <div class="leftside">
+                    <img src="../img/img_card.jpg"
+                        class="product" alt="CardImg" />
+                </div>
+                <div class="rightside">
+                    <form action="">
+                        <h1>Crea tu tarjeta</h1>
+                        <h2>Informacion Requerida</h2>
+
+                        <p>Card Color</p>
+                        <select class="inputbox" name="card_type" id="card_type" required v-model="cardColor">
+                            <option value="">--Selecciona el color de tu tarjeta--</option>
+                            <option value="GOLD">Gold</option>
+                            <option value="SILVER">Silver</option>
+                            <option value="TITANIUM">Titanium</option>
+                        </select>
+
+                        <p>Card Type</p>
+                        <select class="inputbox" name="card_type" id="card_type" required v-model="type">
+                            <option value="">--Selecciona el tipo de tu tarjeta--</option>
+                            <option value="DEBIT">Debito</option>
+                            <option value="CREDIT">Credito</option>
+                        </select>
+                        <button type="button" class="button" @click="crearTarjetas()">Crear Tarjeta</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--  -->
+
+    </div>
+    <!-- Boostrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- vue -->
+    <script src="https://unpkg.com/vue@3"></script>
+    <!-- js -->
+    <script src="../js/createCard.js"></script>
+
+</body>
+
+</html>

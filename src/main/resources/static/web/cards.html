@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- iconos -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Mulish:wght@300;700&family=Quicksand:wght@300;400&display=swap"
+        rel="stylesheet">
+    <!-- css -->
+    <link href="../css/card.css" rel="stylesheet">
+    <title>HomeBanking</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="d-flex">
+            <div id="sidebar-container">
+                <div class="logo ">
+                    <h1 class="text-light font-weight-bold">HomeBanking</h1>
+                </div>
+                <div class="menu">
+                    <a href="../web/accounts.html" class="d-block text-light p-4">
+                        <ion-icon class="icon lead" name="person-circle-outline"></ion-icon>Cuentas
+                    </a>
+                    <a href="../web/cards.html" class="d-block text-light p-4">
+                        <ion-icon class="icon lead" name="card-outline"></ion-icon>Tarjeta
+                    </a>
+                    <a href="../web/transfers.html" class="d-block text-light p-4">
+                        <ion-icon class="icon lead" name="swap-horizontal-outline"></ion-icon>
+                        </ion-icon>Transferencia
+                    </a>
+                </div>
+            </div>
+
+            <!-- NAVBAR -->
+            <div class="w-100">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between border-bottom">
+
+                    <div class="container">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <ion-icon name="person-outline"></ion-icon>
+                                        <!-- aca va la foto de perfil clases a usar class="img-fluid rounded-circle mr-2     link https://www.youtube.com/watch?v=5SUvT9sjdUE" -->
+                                        {{cliente.firstName}}
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#">mi perfil</a></li>
+                                        <li><a class="dropdown-item" href="#">Suscripciones</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" @click="signOut()">Cerra Sesion</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <form class="d-flex position-relative">
+                                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                                <button class="btn position-absolute lupaBuscar" type="submit">
+                                    <ion-icon name="search-outline" class="lead"></ion-icon>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+
+
+                <!-- Contenido -->
+                <div id="content" class="d-flex flex-column">
+                    <section class="py-3">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-9">
+                                    <h2 class="fw-bold mb-0">Bienvenido {{cliente.firstName}} {{cliente.lastName}}
+                                    </h2>
+                                    <p class="lead text-muted">Te mostramos todas tus tarjetas disponibles hasta el
+                                        momento.
+                                    </p>
+
+                                    <!-- aca debo comenzar hacer el v-if o v-show para desaparecer el boton -->
+                                    <div v-if="isCard">
+                                        <a href="../web/createCard.html"><button type="button"
+                                                class="btn btn-success btn-lg">Crear Tarjetas
+                                            </button>
+                                        </a>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="bg-mix">
+                        <div class="container">
+                            <!-- <div class="card rouded-0"> -->
+                            <div class="card-body">
+                                <!-- <div class="row" > -->
+                                    <div class="grid my-3">
+                                        <!-- ACA COMIENZA -->
+                                        <!-- card -->
+                                        <div class="card g-col-6" v-for="tarjeta in tarjetas">
+                                            <div class="card__front card__part"
+                                                :class="{'cardGOLD': tarjeta.color == 'GOLD', 'cardSILVER': tarjeta.color == 'SILVER', 'cardTITANIUM': tarjeta.color == 'TITANIUM'}">
+                                                <img class="card__front-square card__square"
+                                                    src="data:image/svg+xml;charset=utf8,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='50px' x='0px' y='0px' viewBox='0 0 40 40' style='enable-background:new 0 0 40 40;' xml:space='preserve'%3E%3Cg id='surface1'%3E%3Cpath fill='%23F5CE85' d='M8.9,34.5c-6.4,0.1-6.4,0.1-6.4-6.4V11.9c0-3.5-0.1-6.4,3.4-6.4h25.3c6.4,0,6.4,0,6.4,6.4v16.3 c0,6.4,0,6.4-6.4,6.4L8.9,34.5z'/%3E%3Cpath fill='%23967A44' d='M31.1,6C37,6,37,6,37,11.9v16.3c0,5.9,0,5.9-5.9,5.9H8.9c-5.9,0-5.9,0-5.9-6V11.9C3,8.2,2.7,6,6,6H31.1 M31.1,5H9.2C2.3,5,2,5,2,11.9v16.3C2,35,2,35,8.9,35h22.3c6.9-0.1,6.9-0.1,6.9-6.9V11.9C38.1,5,38.1,5,31.1,5z'/%3E%3Cpath fill='%23967A44' d='M29,35c-3.3,0-6-2.7-6-6s2.7-6,6-6h8.5v1H29c-2.8,0-5,2.2-5,5s2.2,5,5,5V35z'/%3E%3Cpath fill='%23967A44' d='M11,35v-1c2.8,0,5-2.2,5-5s-2.2-5-5-5H2.5v-1H11c3.3,0,6,2.7,6,6S14.3,35,11,35z'/%3E%3Cpath fill='%23967A44' d='M37.5,17H27c-2.2,0-4-1.8-4-4s1.8-4,4-4h2.1v1H27c-1.7,0-3,1.3-3,3s1.3,3,3,3h10.5V17z'/%3E%3Cpath fill='%23967A44' d='M28,16h1v7.5h-1V16z'/%3E%3Cpath fill='%23967A44' d='M13,17H2.5v-1H13c1.7,0,3-1.3,3-3s-1.3-3-3-3h-2.1V9H13c2.2,0,4,1.8,4,4S15.2,17,13,17z'/%3E%3Cpath fill='%23967A44' d='M11,16h1v7.5h-1V16z'/%3E%3C/g%3E%3C/svg%3E">
+                                                <img class="card__front-logo card__logo"
+                                                    src="data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='56' viewBox='0 0 46 56'%3E%3Ctitle%3EContactlessIndicator 000%3C/title%3E%3Cpath fill='none' stroke='%23FFF' stroke-width='6' stroke-linecap='round' d='m35,3a50,50 0 0,1 0,50M24,8.5a39,39 0 0,1 0,39M13.5,13.55a28.2,28.5 0 0,1 0,28.5M3,19a18,17 0 0,1 0,18'/%3E%3C/svg%3E">
+                                                <p class="card_numer">{{tarjeta.number}}</p>
+                                                <div class="card__space-75">
+                                                    <span class="card__label">Card holder</span>
+                                                    <p class="card__info">{{cliente.firstName}}
+                                                        {{cliente.lastName}}</p>
+                                                    <span class="card__label">{{tarjeta.type}}</span>
+                                                </div>
+                                                <div class="card__space-25">
+                                                    <span class="card__label">Expires</span>
+                                                    <p class="card__info">{{tarjeta.cvv}}</p>
+                                                    <p class="card__label">{{tarjeta.color}}</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="card__back card__part"
+                                                :class="{'cardGOLD': tarjeta.color == 'GOLD', 'cardSILVER': tarjeta.color == 'SILVER', 'cardTITANIUM': tarjeta.color == 'TITANIUM'}">
+                                                <div class="card__black-line"></div>
+                                                <div class="card__back-content">
+                                                    <div class="card__secret">
+                                                        <p class="card__secret--last">{{tarjeta.cvv}}</p>
+                                                    </div>
+                                                    <img class="card__back-logo card__logo"
+                                                        src="data:image/svg+xml;charset=utf8,%3Csvg width='75' height='75' viewBox='0 0 200 155' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:cc='http://creativecommons.org/ns%23' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns%23'%3E%3Cmetadata%3E%3Crdf:RDF%3E%3Ccc:Work rdf:about=''%3E%3Cdc:format%3Eimage/svg+xml%3C/dc:format%3E%3Cdc:type rdf:resource='http://purl.org/dc/dcmitype/StillImage'/%3E%3Cdc:title/%3E%3C/cc:Work%3E%3C/rdf:RDF%3E%3C/metadata%3E%3Cg transform='translate(1565.7 -1106.8)'%3E%3Cg transform='matrix(3.1437 0 0 3.1437 -4835.7 -1027.6)'%3E%3Cg transform='matrix(1.25 0 0 -1.25 1102.5 727.74)'%3E%3Cpath d='m0 0v-0.103h0.095c0.021 0 0.039 5e-3 0.052 0.013 0.012 8e-3 0.019 0.022 0.019 0.039s-7e-3 0.03-0.019 0.038c-0.013 9e-3 -0.031 0.013-0.052 0.013zm0.096 0.072c0.049 0 0.087-0.011 0.114-0.033s0.04-0.052 0.04-0.09c0-0.032-0.01-0.058-0.032-0.079-0.021-0.02-0.051-0.033-0.091-0.038l0.126-0.145h-0.098l-0.117 0.144h-0.038v-0.144h-0.082v0.385zm-0.025-0.518c0.045 0 0.087 9e-3 0.125 0.026 0.039 0.017 0.073 0.04 0.102 0.069s0.052 0.063 0.069 0.103c0.016 0.039 0.025 0.081 0.025 0.126s-9e-3 0.087-0.025 0.126c-0.017 0.039-0.04 0.074-0.069 0.103s-0.063 0.052-0.102 0.069c-0.038 0.016-0.08 0.024-0.125 0.024s-0.088-8e-3 -0.127-0.024c-0.04-0.017-0.075-0.04-0.104-0.069s-0.052-0.064-0.068-0.103c-0.017-0.039-0.025-0.081-0.025-0.126s8e-3 -0.087 0.025-0.126c0.016-0.04 0.039-0.074 0.068-0.103s0.064-0.052 0.104-0.069c0.039-0.017 0.082-0.026 0.127-0.026m0 0.739c0.059 0 0.113-0.011 0.165-0.033 0.051-0.021 0.095-0.051 0.134-0.089 0.038-0.037 0.068-0.081 0.09-0.132 0.022-0.05 0.033-0.104 0.033-0.161s-0.011-0.111-0.033-0.161-0.052-0.094-0.09-0.132c-0.039-0.037-0.083-0.067-0.134-0.089-0.052-0.022-0.106-0.033-0.165-0.033-0.06 0-0.115 0.011-0.167 0.033s-0.097 0.052-0.135 0.089c-0.038 0.038-0.068 0.082-0.09 0.132s-0.033 0.104-0.033 0.161 0.011 0.111 0.033 0.161c0.022 0.051 0.052 0.095 0.09 0.132 0.038 0.038 0.083 0.068 0.135 0.089 0.052 0.022 0.107 0.033 0.167 0.033m-38.961 1.483c0 0.734 0.481 1.337 1.267 1.337 0.751 0 1.258-0.577 1.258-1.337s-0.507-1.337-1.258-1.337c-0.786 0-1.267 0.603-1.267 1.337m3.381 0v2.088h-0.908v-0.507c-0.288 0.376-0.725 0.612-1.319 0.612-1.171 0-2.089-0.918-2.089-2.193 0-1.276 0.918-2.193 2.089-2.193 0.594 0 1.031 0.236 1.319 0.612v-0.507h0.908zm30.684 0c0 0.734 0.481 1.337 1.267 1.337 0.752 0 1.258-0.577 1.258-1.337s-0.506-1.337-1.258-1.337c-0.786 0-1.267 0.603-1.267 1.337m3.382 0v3.765h-0.909v-2.184c-0.288 0.376-0.725 0.612-1.319 0.612-1.171 0-2.089-0.918-2.089-2.193 0-1.276 0.918-2.193 2.089-2.193 0.594 0 1.031 0.236 1.319 0.612v-0.507h0.909zm-22.795 1.38c0.585 0 0.961-0.367 1.057-1.013h-2.167c0.097 0.603 0.463 1.013 1.11 1.013m0.018 0.813c-1.224 0-2.08-0.891-2.08-2.193 0-1.328 0.891-2.193 2.141-2.193 0.629 0 1.205 0.157 1.712 0.585l-0.445 0.673c-0.35-0.279-0.796-0.437-1.215-0.437-0.585 0-1.118 0.271-1.249 1.023h3.101c9e-3 0.113 0.018 0.227 0.018 0.349-9e-3 1.302-0.813 2.193-1.983 2.193m10.964-2.193c0 0.734 0.481 1.337 1.267 1.337 0.751 0 1.258-0.577 1.258-1.337s-0.507-1.337-1.258-1.337c-0.786 0-1.267 0.603-1.267 1.337m3.381 0v2.088h-0.908v-0.507c-0.289 0.376-0.725 0.612-1.319 0.612-1.171 0-2.089-0.918-2.089-2.193 0-1.276 0.918-2.193 2.089-2.193 0.594 0 1.03 0.236 1.319 0.612v-0.507h0.908zm-8.509 0c0-1.267 0.882-2.193 2.228-2.193 0.629 0 1.048 0.14 1.502 0.498l-0.436 0.734c-0.341-0.245-0.699-0.376-1.093-0.376-0.725 9e-3 -1.258 0.533-1.258 1.337s0.533 1.328 1.258 1.337c0.394 0 0.752-0.131 1.093-0.376l0.436 0.734c-0.454 0.358-0.873 0.498-1.502 0.498-1.346 0-2.228-0.926-2.228-2.193m11.707 2.193c-0.524 0-0.865-0.245-1.101-0.612v0.507h-0.9v-4.176h0.909v2.341c0 0.691 0.297 1.075 0.891 1.075 0.184 0 0.376-0.026 0.568-0.105l0.28 0.856c-0.201 0.079-0.463 0.114-0.647 0.114m-24.341-0.437c-0.437 0.288-1.039 0.437-1.703 0.437-1.058 0-1.739-0.507-1.739-1.337 0-0.681 0.507-1.101 1.441-1.232l0.429-0.061c0.498-0.07 0.733-0.201 0.733-0.437 0-0.323-0.332-0.507-0.952-0.507-0.629 0-1.083 0.201-1.389 0.437l-0.428-0.707c0.498-0.367 1.127-0.542 1.808-0.542 1.206 0 1.905 0.568 1.905 1.363 0 0.734-0.55 1.118-1.459 1.249l-0.428 0.062c-0.393 0.052-0.708 0.13-0.708 0.41 0 0.306 0.297 0.489 0.795 0.489 0.533 0 1.049-0.201 1.302-0.358zm11.716 0.437c-0.524 0-0.865-0.245-1.1-0.612v0.507h-0.9v-4.176h0.908v2.341c0 0.691 0.297 1.075 0.891 1.075 0.184 0 0.376-0.026 0.568-0.105l0.28 0.856c-0.201 0.079-0.463 0.114-0.647 0.114m-7.749-0.105h-1.485v1.267h-0.918v-1.267h-0.847v-0.83h0.847v-1.905c0-0.969 0.376-1.546 1.45-1.546 0.394 0 0.848 0.122 1.136 0.323l-0.262 0.778c-0.271-0.157-0.568-0.236-0.804-0.236-0.454 0-0.602 0.28-0.602 0.699v1.887h1.485zm-13.577-4.176v2.621c0 0.987-0.629 1.651-1.643 1.66-0.533 9e-3 -1.083-0.157-1.468-0.743-0.288 0.463-0.742 0.743-1.38 0.743-0.446 0-0.882-0.131-1.223-0.62v0.515h-0.909v-4.176h0.917v2.315c0 0.725 0.402 1.11 1.023 1.11 0.603 0 0.908-0.393 0.908-1.101v-2.324h0.918v2.315c0 0.725 0.419 1.11 1.022 1.11 0.62 0 0.917-0.393 0.917-1.101v-2.324z' fill='%23FFFFFF'/%3E%3C/g%3E%3Cg transform='matrix(1.25 0 0 -1.25 1103.2 710.77)'%3E%3Cpath d='m0 0v0.61h-0.159l-0.184-0.419-0.183 0.419h-0.16v-0.61h0.113v0.46l0.172-0.397h0.117l0.172 0.398v-0.461zm-1.009 0v0.506h0.204v0.103h-0.52v-0.103h0.204v-0.506z' fill='%23f79410'/%3E%3C/g%3E%3Cpath d='m1080.6 714.05h-17.202v-30.915h17.202z' fill='%23ff5f00'/%3E%3Cg transform='matrix(1.25 0 0 -1.25 1064.5 698.59)'%3E%3Cpath d='m0 0c0 5.017 2.349 9.486 6.007 12.366-2.675 2.106-6.051 3.363-9.72 3.363-8.686 0-15.727-7.042-15.727-15.729s7.041-15.729 15.727-15.729c3.669 0 7.045 1.257 9.72 3.363-3.658 2.88-6.007 7.349-6.007 12.366' fill='%23eb001b'/%3E%3C/g%3E%3Cg transform='matrix(1.25 0 0 -1.25 1103.8 698.59)'%3E%3Cpath d='m0 0c0-8.687-7.041-15.729-15.727-15.729-3.669 0-7.045 1.257-9.721 3.363 3.659 2.88 6.008 7.349 6.008 12.366s-2.349 9.486-6.008 12.366c2.676 2.106 6.052 3.363 9.721 3.363 8.686 0 15.727-7.042 15.727-15.729' fill='%23f79e1b'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- ACA TERMINA -->
+                                    </div>
+                                <!-- </div> -->
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                    </section>
+
+
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- vue -->
+    <script src="https://unpkg.com/vue@3"></script>
+    <!-- js -->
+    <script src="../js/cards.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
