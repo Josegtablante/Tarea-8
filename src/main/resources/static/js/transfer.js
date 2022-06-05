@@ -16,7 +16,11 @@ Vue.createApp({
             type:"",
             cardColor:"",
 
-        };
+            descripcion: "",
+            comentario:null,
+
+
+        }
 
     },
 

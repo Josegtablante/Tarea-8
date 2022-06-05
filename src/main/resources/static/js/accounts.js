@@ -32,18 +32,19 @@ Vue.createApp({
 
     methods: {
 
-        signOut() {
+       signOut() {
             axios.post('/api/logout')
                 .then(response => console.log('signed out!!!'))
                 .then(response => window.location.href = "http://localhost:8080/web/index.html")
         },
 
 
-        crearCuenta() {
+       crearCuenta() {
             axios.post('http://localhost:8080/api/clients/current/accounts')
             .then(response => { console.log("registrado") })
             .then(response => { if (this.crearCuenta.length >= 3) { window.alert("no puedes crear mas de tres cuentas") } })
             .then(response => { location.reload() }) //como hacer para limitar la cuenta a solo 3 . pensar
+            return this.crearCuenta()
         },
 
 

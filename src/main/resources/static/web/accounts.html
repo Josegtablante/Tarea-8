@@ -117,79 +117,77 @@
 
                                     <div class="cuentas">
 
-                                        <div v-if="cuentas.length >= 3">
+                                        <template v-if="crearCuenta.length >= 3">
                                             <button type="button" class="btn btn-success btn-lg"
                                                 @click="crearCuenta()">Crear Cuenta</button>
-                                        </div>
-
-                                        <!-- esto es otro comentario para la prueba exitosa dos -->
-                                        <!-- esto es un comentario  -->
-                                        
-                                        <div class="row">
-                                            <div class="col-md-4 mx-auto stat" v-for="cuenta in cuentas">
-                                                <!-- <h6 class="text-muted">ID: {{cuenta.id}}</h6> -->
-                                            <h6 class="text-muted">N° Cuenta: {{cuenta.number}}</h6>
-                                            <h3 class="fw-bold">$ {{cuenta.balance}}</h3>
-                                            <h6 class="text-muted">{{cuenta.creationDate.substring(0,10)}}</h6>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
 
 
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- prestamos -->
-                    <section class="py-3">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-9">
-                                    <!-- <h2 class="fw-bold mb-0">Bienvenido {{cliente.first_NAME}} {{cliente.last_NAME}}</h2> -->
-                                    <p class="lead text-muted">Tus Prestamos</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- CONTENIDO DE PRESTAMOS -->
-                    <section>
-                        <div class="container">
-                            <div class="card rouded-0">
-                                <div class="card-body">
-                                    <div class="row">
-
-
-                                        <!-- mostramos si tenemos trestamos y usamos v-if  -->
-                                        <div class="cardPrestamos">
-                                            <div v-if="prestamos.length === 0">
-                                                <p>no tienes prestamos</p>
-                                            </div>
-                                            <div v-else class="d-flex justify-content-around">
-                                                <div v-for="prestamo in prestamos" class="col-md-4 mx-auto stat">
-                                                    <h6 class="text-muted">Nombre del prestamo: {{prestamo.name}}</h6>
-                                                    <h6 class="text-muted">Monto Maximo: ${{prestamo.amounts}}</h6>
-                                                    <h3 class="fw-bold">Cuotas: {{prestamo.payments}}</h3>
+                                            <div class="row">
+                                                <div class="col-md-4 mx-auto stat" v-for="cuenta in cuentas">
+                                                    <!-- <h6 class="text-muted">ID: {{cuenta.id}}</h6> -->
+                                                    <h6 class="text-muted">N° Cuenta: {{cuenta.number}}</h6>
+                                                    <h3 class="fw-bold">$ {{cuenta.balance}}</h3>
+                                                    <h6 class="text-muted">{{cuenta.creationDate.substring(0,10)}}</h6>
                                                 </div>
+                                        </template>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                </div>
+                </section>
+                <!-- prestamos -->
+                <section class="py-3">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <!-- <h2 class="fw-bold mb-0">Bienvenido {{cliente.first_NAME}} {{cliente.last_NAME}}</h2> -->
+                                <p class="lead text-muted">Tus Prestamos</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- CONTENIDO DE PRESTAMOS -->
+                <section>
+                    <div class="container">
+                        <div class="card rouded-0">
+                            <div class="card-body">
+                                <div class="row">
+
+
+                                    <!-- mostramos si tenemos trestamos y usamos v-if  -->
+                                    <div class="cardPrestamos">
+                                        <div v-if="prestamos.length === 0">
+                                            <p>no tienes prestamos</p>
+                                        </div>
+                                        <div v-else class="d-flex justify-content-around">
+                                            <div v-for="prestamo in prestamos" class="col-md-4 mx-auto stat">
+                                                <h6 class="text-muted">Nombre del prestamo: {{prestamo.name}}</h6>
+                                                <h6 class="text-muted">Monto Maximo: ${{prestamo.amounts}}</h6>
+                                                <h3 class="fw-bold">Cuotas: {{prestamo.payments}}</h3>
                                             </div>
                                         </div>
-
                                     </div>
+
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </section>
 
 
 
 
 
-
-                </div>
 
             </div>
 
         </div>
+
+    </div>
 
     </div>
 

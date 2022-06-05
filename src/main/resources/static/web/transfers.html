@@ -108,9 +108,60 @@
                                         <div class=" d-flex  my-3">
 
                                             <form action="">
-                                                
-                                            </form>
+                                                <h1>Transferencia</h1>
+                                                <h2>Informacion Requerida</h2>
 
+                                                <!-- tipo de cuenta -->
+                                                <p>Tipo de cuenta</p>
+                                                <select class="inputbox" name="card_type" id="card_type" required
+                                                    v-model="cardColor">
+                                                    <option value="">--A quien quieres transferirle--</option>
+                                                    <option value="cuentaPropia">Propia</option>
+                                                    <option value="tercero">Tercero</option>
+                                                    <!-- <select v-if="tercero = true" name="" id="" >
+                                                        <input type="number" name="" id="">
+                                                    </select> -->
+                                                </select>
+                                                <div>
+                                                    <p>Monto a Transferir</p>
+                                                    <label for="montoATransferir"></label>
+                                                    <input type="number" name="montoATransferir">
+                                                </div>
+                                                <div>
+                                                    <p>Agrega un comentario</p>
+                                                    <div class="radio">
+                                                        <p>Te gustaria enviarle un comentario</p>
+                                                        <label for="radio-inline">
+                                                            <input type="radio" v-model="comentario" name="si"  :value="true" defaul>Si
+                                                        </label>
+                                                        <label for="radio-inline">
+                                                            <input type="radio" v-model="comentario" name="no" :value="false">No
+                                                        </label>
+                                                     </div>
+                                                     <div>
+                                                         <label for=""></label>
+                                                         <input v-if="comentario" type="text" name="comentario" id="">
+                                                     </div>
+                                                </div>
+
+
+
+
+
+
+
+                                                <!-- <p>Monto a enviar</p> -->
+
+                                                <!-- <input type="number" name="montoAEnviar" id="montoAEnviar> -->
+
+
+
+
+
+
+
+                                                <!-- <button type="button" class="button" @click="crearTarjetas()">Crear Tarjeta</button> -->
+                                            </form>
 
                                         </div>
                                     </div>
@@ -118,7 +169,7 @@
                             </div>
                         </div>
                     </section>
-                    
+
 
                 </div>
 
