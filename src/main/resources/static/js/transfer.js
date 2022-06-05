@@ -18,6 +18,8 @@ Vue.createApp({
 
             descripcion: "",
             comentario:null,
+            cuentaPropia:false,
+            cuentaTerceros:null,
 
 
         }

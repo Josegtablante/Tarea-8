@@ -109,39 +109,51 @@
 
                                             <form action="">
                                                 <h1>Transferencia</h1>
-                                                <h2>Informacion Requerida</h2>
-
                                                 <!-- tipo de cuenta -->
                                                 <p>Tipo de cuenta</p>
-                                                <select class="inputbox" name="card_type" id="card_type" required
-                                                    v-model="cardColor">
+                                                <select class="inputbox" name="card_type" id="card_type" required>
                                                     <option value="">--A quien quieres transferirle--</option>
-                                                    <option value="cuentaPropia">Propia</option>
-                                                    <option value="tercero">Tercero</option>
-                                                    <!-- <select v-if="tercero = true" name="" id="" >
-                                                        <input type="number" name="" id="">
-                                                    </select> -->
+                                                    <option value="cuentaPropia" v-model="cuentaPropia" :value="!true">
+                                                        Propia</option>
+                                                    <option value="tercero" v-model="cuentaPropia" :value="false">
+                                                        Tercero</option>
                                                 </select>
+
+                                                <div class="cuentaPropia" v-for="cuenta in cuentas">
+                                                    <select v-if="cuentaPropia" name="" id="">
+                                                        <h6 class="text-muted">N° Cuenta: {{cuenta.number}} Balance: $
+                                                            {{cuenta.balance}}</h6>
+                                                    </select>
+                                                </div>
+
+
+
                                                 <div>
                                                     <p>Monto a Transferir</p>
                                                     <label for="montoATransferir"></label>
-                                                    <input type="number" name="montoATransferir">
+                                                    <input type="number" name="montoATransferir" placeholder="$">
                                                 </div>
                                                 <div>
                                                     <p>Agrega un comentario</p>
                                                     <div class="radio">
                                                         <p>Te gustaria enviarle un comentario</p>
                                                         <label for="radio-inline">
-                                                            <input type="radio" v-model="comentario" name="si"  :value="true" defaul>Si
+                                                            <input type="radio" v-model="comentario" name="si"
+                                                                :value="true">Si
                                                         </label>
                                                         <label for="radio-inline">
-                                                            <input type="radio" v-model="comentario" name="no" :value="false">No
+                                                            <input type="radio" v-model="comentario" name="no"
+                                                                :value="false">No
                                                         </label>
-                                                     </div>
-                                                     <div>
-                                                         <label for=""></label>
-                                                         <input v-if="comentario" type="text" name="comentario" id="">
-                                                     </div>
+                                                    </div>
+                                                    <div>
+                                                        <label for=""></label>
+                                                        <input v-if="comentario" type="text" name="comentario" id="">
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" class="btn btn-success btn-lg"
+                                                            @click="">Enviar Transferencia</button>
+                                                    </div>
                                                 </div>
 
 
