@@ -1,4 +1,4 @@
-Vue.createApp({
+const app = Vue.createApp({
 
     data() {
         return {
@@ -10,7 +10,7 @@ Vue.createApp({
             ballance: [],
             number: [],
             createAccount: [],
-            crearCuenta:[],
+
         };
     },
 
@@ -39,13 +39,21 @@ Vue.createApp({
         },
 
 
-       crearCuenta() {
+        crearCuenta() {
             axios.post('http://localhost:8080/api/clients/current/accounts')
-            .then(response => { console.log("registrado") })
-            .then(response => { if (this.crearCuenta.length >= 3) { window.alert("no puedes crear mas de tres cuentas") } })
-            .then(response => { location.reload() }) //como hacer para limitar la cuenta a solo 3 . pensar
-            return this.crearCuenta()
+                .then(response => { console.log("registrado") })
+                .then(response => {if (this.crearCuenta.length >= 3) {window.alert("no puedes crear mas de tres cuentas")}})
+                .then(response => { location.reload() }) //como hacer para limitar la cuenta a solo 3 . pensar
         },
+
+
+        // crearCuenta() {
+        //     axios.post('http://localhost:8080/api/clients/current/accounts')
+        //     .then(response => { console.log("registrado") })
+        //     .then(response => { if (this.crearCuenta.length >= 2) { window.alert("no puedes crear mas de tres cuentas") } })
+        //     .then(response => { location.reload()}) 
+        //     return this.cuentas
+        // },
 
 
     },

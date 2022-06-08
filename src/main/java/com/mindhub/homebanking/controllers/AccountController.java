@@ -42,7 +42,7 @@ public class AccountController { //el controlador escucha peticiones y responde 
     public ResponseEntity<Object> createAccount(Authentication authentication) {
 
         Client clienteAutenticado = clientRepository.findByEmail(authentication.getName());
-        String number = "VIN"+ getRandomNumber(1000,9999)+" "+getRandomNumber(1000,9999)+" "+getRandomNumber(1000,9999)+" "+getRandomNumber(1000,9999);
+        String number = "VIN"+getRandomNumber(1000,9999);
         double balance = 0.00;
 
         if (clienteAutenticado.getAccounts().size() >= 3 ){

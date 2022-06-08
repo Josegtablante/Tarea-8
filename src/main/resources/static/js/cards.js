@@ -30,15 +30,6 @@ Vue.createApp({
                 // console.log(this.tarjetas)
 
 
-                console.log(this.tarjetas[0].color)
-                console.log(this.tarjetas[0].type)
-                console.log(this.tarjetas)
-                console.log(this.cliente)
-
-                if (tarjetas.length >=5 ) {
-                    this.isCard = false;
-                }
-        
 
             })
     },

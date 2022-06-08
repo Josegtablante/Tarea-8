@@ -3,23 +3,26 @@ Vue.createApp({
     data() {
         return {
             cliente: [], //PROPIEDADES
-            
-            cuentas:[],
-            cantidades:[],
-            ballance:[],
-            number:[],
-            prestamos:[],
+            cuentas: [],
+            cantidades: [],
+            ballance: [],
+            number: [],
+            prestamos: [],
+            transfer: [],
 
-            tarjetas:[],
-            cardHolder:[],
+            tarjetas: [],
+            cardHolder: [],
 
-            type:"",
-            cardColor:"",
+            type: "",
+            cardColor: "",
 
-            descripcion: "",
-            comentario:null,
-            cuentaPropia:false,
-            cuentaTerceros:null,
+            misCuentas: true,
+            cantidad: '',
+            name: '',
+
+            description: "",
+            originAccount: "",
+            destinationAccount: "",
 
 
         }
@@ -29,39 +32,54 @@ Vue.createApp({
 
 
     created() {
-        axios.get("http://localhost:8080/api/clients/current").then(data => {
+        axios.get("http://localhost:8080/api/clients/current")
+            .then(data => {
                 this.cliente = data.data //este muestra toda la data o Json
                 this.cuentas = this.cliente.accounts
                 this.prestamos = this.cliente.loans
                 this.tarjetas = this.cliente.cards
-                // console.log(this.cliente)
-                // console.log(this.prestamos)
-                // console.log(this.tarjetas)
-
+                console.log(this.cliente)
+                console.log(this.cuentas)
+                // this.trasfer = this.cuentas[2].transactions
+                // console.log(this.trasfer)
             })
     },
 
     methods: {
-
-        crearTarjetas(){
-            axios.post('/api/clients/current/cards',`type=${this.type}&cardColor=${this.cardColor}`, { headers: {'content-type': 'application/x-www-form-urlencoded'}})
-            .then(response => { console.log("Tarjeta Creada") })
-            // .then(response => {if (this.crearCuenta.length >= 3) {window.alert("no puedes crear mas de tres cuentas")}})
-            .then(response => window.location.href = "http://localhost:8080/web/cards.html") //como hacer para limitar la cuenta a solo 3 . pensar
-            
-        },
-
         signOut() {
             axios.post('/api/logout')
                 .then(response => console.log('signed out!!!'))
                 .then(response => window.location.href = "http://localhost:8080/web/index.html")
         },
 
+        obtenerCuentaOrigen(cuentaNumber) {
+            this.originAccount = cuentaNumber
+            console.log(this.originAccount)
+        },
+
+        transferencia() {
+            axios.post('/api/transactions', `cantidad=${this.cantidadAEnviar}&description=${this.description}&originAccount=${this.originAccount}&destinationAccount=${this.destinationAccount}`, { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
+                .then(response => console.log("transferencia enviada"))
+                .then(response => { window.location.reload() })
+        },
+
+
 
     },
+
+
+
+
+
+
 
     computed: {
+        comprobar() {
+            return this.cantidad.length > 2 ? true : false
+        }
+
     },
+
 
 
 

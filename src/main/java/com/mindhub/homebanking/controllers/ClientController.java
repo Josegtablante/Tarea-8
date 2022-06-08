@@ -58,8 +58,8 @@ public class ClientController {
         Client cliente = new Client(firstName, lastName, email, newpassword);
         clientRepository.save(cliente);
 
-        //numero de cuenta
-        String number = "VIN " + getRandomNumber(1000,9999)+ " "+getRandomNumber(1000,9999)+ " "+getRandomNumber(1000,9999)+ " "+getRandomNumber(1000,9999);
+        //numero de cuenta + " "+getRandomNumber(1000,9999)+ " "+getRandomNumber(1000,9999)+ " "+getRandomNumber(1000,9999)
+        String number = "VIN " + getRandomNumber(1000,9999);
         //se genera una cuenta al inciar
         Account account1 = new Account(number,0.00, LocalDateTime.now().plusYears(5),cliente);
         accountRepository.save(account1);

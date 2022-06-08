@@ -18,12 +18,30 @@
         href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Mulish:wght@300;700&family=Quicksand:wght@300;400&display=swap"
         rel="stylesheet">
     <!-- css -->
-    <link href="../css/custom.css" rel="stylesheet">
+    <link href="../css/transfer.css" rel="stylesheet">
     <title>HomeBanking</title>
 </head>
 
+
+
 <body>
+
+    <!-- colocar dentro de la app  -->
+
+
+
+
     <div id="app">
+
+        <!-- <div class="loader">
+            <div class="lds-ellipsis" id="loader">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div> -->
+
         <div class="d-flex">
             <div id="sidebar-container">
                 <div class="logo ">
@@ -34,8 +52,7 @@
                         <ion-icon class="icon lead" name="person-circle-outline"></ion-icon>Cuentas
                     </a>
                     <a href="../web/cards.html" class="d-block text-light p-4">
-                        <ion-icon class="icon lead" name="card-outline"></ion-icon>
-                        </ion-icon>Tarjetas
+                        <ion-icon class="icon lead" name="card-outline"></ion-icon>Tarjeta
                     </a>
                     <a href="#" class="d-block text-light p-4">
                         <ion-icon class="icon lead" name="swap-horizontal-outline"></ion-icon>
@@ -47,6 +64,7 @@
             <!-- NAVBAR -->
             <div class="w-100">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between border-bottom">
+
                     <div class="container">
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -69,7 +87,7 @@
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="#" @click="signOut()">Cerra Sesion</a></li>
+                                        <li><a class="dropdown-item" @click="signOut()">Cerra Sesion</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -86,110 +104,170 @@
 
 
                 <!-- Contenido -->
+                <!-- saludo -->
                 <div id="content" class="d-flex flex-column">
                     <section class="py-3">
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-9">
-                                    <h2 class="fw-bold mb-0">Bienvenido {{cliente.firstName}} {{cliente.lastName}}
-                                    </h2>
-                                    <p class="lead text-muted">Revisa la ultima informacion</p>
+                                    <h2 class="fw-bold mb-0">Bienvenido {{cliente.firstName}} {{cliente.lastName}}</h2>
+                                    <p class="lead text-muted">Puedes realizar transferencias comodamente</p>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <!-- CONTENIDO DE CUENTAS -->
-                    <section class="bg-mix">
+                    <!-- cuentas -->
+                    <section class="py-3">
                         <div class="container">
-                            <div class="card rouded-0">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class=" d-flex  my-3">
+                            <div class="row justify-content-evenly">
+                                <div class="card text-white bg-dark mb-3 pt-3" style="width: 18rem;"
+                                    v-for="cuenta in cuentas">
+                                    <img src="../img/img_transfer.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Cuenta: {{cuenta.number}}</h5>
+                                        <h5 class="card-text">Saldo: ${{cuenta.balance}}</h5>
+                                    </div>
 
-                                            <form action="">
-                                                <h1>Transferencia</h1>
-                                                <!-- tipo de cuenta -->
-                                                <p>Tipo de cuenta</p>
-                                                <select class="inputbox" name="card_type" id="card_type" required>
-                                                    <option value="">--A quien quieres transferirle--</option>
-                                                    <option value="cuentaPropia" v-model="cuentaPropia" :value="!true">
-                                                        Propia</option>
-                                                    <option value="tercero" v-model="cuentaPropia" :value="false">
-                                                        Tercero</option>
-                                                </select>
-
-                                                <div class="cuentaPropia" v-for="cuenta in cuentas">
-                                                    <select v-if="cuentaPropia" name="" id="">
-                                                        <h6 class="text-muted">N° Cuenta: {{cuenta.number}} Balance: $
-                                                            {{cuenta.balance}}</h6>
-                                                    </select>
-                                                </div>
-
-
-
-                                                <div>
-                                                    <p>Monto a Transferir</p>
-                                                    <label for="montoATransferir"></label>
-                                                    <input type="number" name="montoATransferir" placeholder="$">
-                                                </div>
-                                                <div>
-                                                    <p>Agrega un comentario</p>
-                                                    <div class="radio">
-                                                        <p>Te gustaria enviarle un comentario</p>
-                                                        <label for="radio-inline">
-                                                            <input type="radio" v-model="comentario" name="si"
-                                                                :value="true">Si
-                                                        </label>
-                                                        <label for="radio-inline">
-                                                            <input type="radio" v-model="comentario" name="no"
-                                                                :value="false">No
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <label for=""></label>
-                                                        <input v-if="comentario" type="text" name="comentario" id="">
-                                                    </div>
-                                                    <div>
-                                                        <button type="button" class="btn btn-success btn-lg"
-                                                            @click="">Enviar Transferencia</button>
-                                                    </div>
-                                                </div>
-
-
-
-
-
-
-
-                                                <!-- <p>Monto a enviar</p> -->
-
-                                                <!-- <input type="number" name="montoAEnviar" id="montoAEnviar> -->
-
-
-
-
-
-
-
-                                                <!-- <button type="button" class="button" @click="crearTarjetas()">Crear Tarjeta</button> -->
-                                            </form>
-
-                                        </div>
+                                    <div class="card-body">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal" @click="obtenerCuentaOrigen(cuenta.number)">
+                                            Enviar Dinero
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
+                    <!--  -->
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- modal header -->
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">HomeBanking</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+
+                                <!-- modal body -->
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="destinatario" class="form-label">Cuenta Destinatario</label>
+                                            <input type="text" class="form-control" placeholder="VIN****"
+                                                id="destinatario" v-model="destinationAccount" :state="comprobar">
+                                            <small></small>
+                                        </div>
+
+                                        <div class="mb-3 form-label">
+                                            <label for="cantidadAEnviar" class="form-label">Cantidad</label>
+                                            <input type="number" class="form-control"
+                                                placeholder="Ingresa la cantidad a enviar" v-model="cantidadAEnviar"
+                                                id="cantidadAEnviar">
+                                        </div>
+
+
+                                        <div class="mb-3 form-label">
+                                            <label for="descripcion" class="form-label">Enviar comentario</label>
+                                            <input type="text" class="form-control" placeholder="comentario"
+                                                v-model="description" id="descripcion">
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <!-- modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" @click="transferencia()">Enviar
+                                        Transferencia</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--  -->
+
+                    <!-- Tabla de movimientos -->
+                    <section class="bg-mix">
+                        <div class="container">
+                            <div class="card rouded-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Tipo de Cuenta</th>
+                                                    <th scope="col">Cantidad</th>
+                                                    <th scope="col">Descripcion</th>
+                                                    <th scope="col">Fecha de la compra</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="transaction in cuentas.transaction">
+                                                    <th scope="row">{{transaction.id}}</th>
+                                                    <td
+                                                        :class="{'text-danger': transaction.type == 'DEBITO', 'text-success': transaction.type == 'CREDITO'}">
+                                                        {{transaction.type}}</td>
+                                                    <td>{{transaction.cantidad}}</td>
+                                                    <td>{{transaction.descripcion}}</td>
+                                                    <td>{{transaction.date}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Contenido -->
+
+
+
 
 
                 </div>
-
             </div>
-
         </div>
 
+
+
+
+
     </div>
+
+
+
+
+
+    </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
 
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

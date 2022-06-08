@@ -30,25 +30,28 @@ public class HomebankingApplication {
 		return (args) -> {
 
 			//CLIENTES
-			Client client1 = new Client("Melba","lorenzo","melbalorenzo@gmail.com", passwordEncoder.encode("1234567"));
+			Client client1 = new Client("Melba","Mora","melbamora@gmail.com", passwordEncoder.encode("asd"));
 			clienteRepository.save(client1);
 
 			Client client2 = new Client("Chloe", "O'Brian", "Chloe@gmail.com", passwordEncoder.encode("abcde123"));
 			clienteRepository.save(client2);
 
-            Client admin = new Client("admin","admin","admin@hola.com", passwordEncoder.encode("admin"));
-			clienteRepository.save(admin);
+			Client client3 = new Client("Jose", "Tablante", "jose@gmail.com", passwordEncoder.encode("asd"));
+			clienteRepository.save(client3);
+
 
             //CUENTAS
-			Account account1 = new Account("VIN001",5000.0,LocalDateTime.now(),client1);
+			Account account1 = new Account("VIN0001",5000.0,LocalDateTime.now(),client1);
 			accountRepository.save(account1);
 
-			Account account2 =new Account("VIN002",7500.0,LocalDateTime.now().plusDays(1),client1);
+			Account account2 =new Account("VIN0002",7500.0,LocalDateTime.now().plusDays(1),client1);
 			accountRepository.save(account2);
 
-			Account account3 =new Account("VIN003",37500.0,LocalDateTime.of(2022,3,8,22,19),client2);
+			Account account3 =new Account("VIN0003",37500.0,LocalDateTime.of(2022,3,8,22,19),client2);
 			accountRepository.save(account3);
 
+			Account account4 =new Account("VIN0004",47500.0,LocalDateTime.now(),client3);
+			accountRepository.save(account4);
 
 			//TRANSACCTION
 			Transaction transaccion1 = new Transaction(DEBITO,-2500.0,"internet",LocalDateTime.now(),account1);
