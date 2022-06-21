@@ -1,4 +1,4 @@
-# T8-homebanking
+# homebanking
 
 Creacion de un Homebanking , aplicando lo aprendido en el bootcamp de Full Stack Developer 
 
