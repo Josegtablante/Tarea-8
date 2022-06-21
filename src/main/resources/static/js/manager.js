@@ -25,8 +25,8 @@ Vue.createApp({
       .then(data => {
         this.loadData = data.data._embedded.cliente
         this.Json = data.data
-        console.log(this.Json)
-        console.log(this.loadData)
+        // console.log(this.Json)
+        // console.log(this.loadData)
 
       })
   },

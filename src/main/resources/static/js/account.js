@@ -26,7 +26,7 @@ Vue.createApp({
                 this.cliente = data.data //este muestra toda la data o Json
                 this.cuentas = this.data.accounts //Entra en Json y muestra accounts
                 this.transactions = data.data.transactions//Entra en Json y muestra accounts
-                console.log(this.cliente)
+                // console.log(this.cliente)
                 // console.log(this.cuentas)
                 this.transactions = this.transactions.sort((a, b) => b.id - a.id)
             })

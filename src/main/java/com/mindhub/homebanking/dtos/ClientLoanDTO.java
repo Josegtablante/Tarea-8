@@ -9,7 +9,6 @@ public class ClientLoanDTO {
     private String name;
     private Integer payments;
     private Double amounts;
-
     public ClientLoanDTO() {
     }
 

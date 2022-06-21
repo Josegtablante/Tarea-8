@@ -19,6 +19,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.3'//dependencia extra que retorna nuestro codigo en un archivo XML.
+
 }
 
 tasks.named('test') {

@@ -65,6 +65,4 @@ public class AccountDTO {
         this.transactions = transactions;
     }
 
-
-
 }

@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 public class Transaction {
 
     @Id //es una anotacion que genera una llave unica
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native") //va a decir que el Id es la clave primaria de transacction
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    //va a decir que el Id es la clave primaria de transacction
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
 
@@ -49,6 +50,7 @@ public class Transaction {
     public void setType(TransactionType type) {
         this.type = type;
     }
+
     public double getCantidad() {
         return cantidad;
     }
@@ -56,6 +58,7 @@ public class Transaction {
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -63,6 +66,7 @@ public class Transaction {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
     public LocalDateTime getDate() {
         return date;
     }

@@ -9,12 +9,13 @@ import java.time.LocalDateTime;
 @Entity
 public class Card {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native") //va a decir que el Id es la clave primaria de transacction
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    //va a decir que el Id es la clave primaria de transacction
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="cliente_id") //PREGUNTAR
+    @JoinColumn(name = "cliente_id")
     private Client cliente;
     private CardColor color;
     private CardType Type;

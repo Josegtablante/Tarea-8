@@ -1,10 +1,12 @@
 package com.mindhub.homebanking.models;
 
 import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.*;
-import java.util.*;
 
-import static java.util.Arrays.asList;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Loan { //loan=prestamo
@@ -16,11 +18,12 @@ public class Loan { //loan=prestamo
     private String name;
     private Double maxAmount; //cantidadMaxima
 
-    @ElementCollection //indica una relacion simple de uno a muchos entre payments y Loan. esta es una entidad que tiene una sola propiedad y que se relaciona con Loan
+    @ElementCollection
+    //indica una relacion simple de uno a muchos entre payments y Loan. esta es una entidad que tiene una sola propiedad y que se relaciona con Loan
     @Column(name = "payments_id")// payments=prestamos
     private List<Integer> payments = new ArrayList<>(); //pago de cuotas. integer es un dato tipo objeto y por eso se le pueden hacer cosas
 
-    @OneToMany(mappedBy="loan",fetch=FetchType.EAGER) //map = asociar
+    @OneToMany(mappedBy = "loan", fetch = FetchType.EAGER) //map = asociar
     private Set<ClientLoan> clientLoans = new HashSet<>();
 
     public Loan() {

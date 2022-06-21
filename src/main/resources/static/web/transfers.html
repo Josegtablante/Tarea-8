@@ -19,52 +19,42 @@
         rel="stylesheet">
     <!-- css -->
     <link href="../css/transfer.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
     <title>HomeBanking</title>
 </head>
 
-
-
 <body>
 
-    <!-- colocar dentro de la app  -->
-
-
-
-
     <div id="app">
-
-        <!-- <div class="loader">
-            <div class="lds-ellipsis" id="loader">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-        </div> -->
-
         <div class="d-flex">
+            <!-- Nav lateral -->
             <div id="sidebar-container">
                 <div class="logo ">
-                    <h1 class="text-light font-weight-bold">HomeBanking</h1>
+                    <a href="../web/accounts.html"><img src="../img/nombre.png" class="homebankLogo" alt="logo"></a>
+                    <!-- <h1 class="text-light font-weight-bold">HomeBanking</h1> -->
                 </div>
                 <div class="menu">
                     <a href="../web/accounts.html" class="d-block text-light p-4">
-                        <ion-icon class="icon lead" name="person-circle-outline"></ion-icon>Cuentas
+                        <ion-icon class="icon lead" name="person-circle-outline" id="cuentasMenu"></ion-icon>Cuentas
                     </a>
                     <a href="../web/cards.html" class="d-block text-light p-4">
-                        <ion-icon class="icon lead" name="card-outline"></ion-icon>Tarjeta
+                        <ion-icon class="icon lead" name="card-outline" id="tarjetasMenu"></ion-icon>Tarjeta
                     </a>
                     <a href="#" class="d-block text-light p-4">
-                        <ion-icon class="icon lead" name="swap-horizontal-outline"></ion-icon>
+                        <ion-icon class="icon lead" name="swap-horizontal-outline" id="transferenciaMenu"></ion-icon>
                         </ion-icon>Transferencia
                     </a>
+                    <!-- <a href="../web/loan-application.html" class="d-block text-light p-4">
+                        <ion-icon class="icon lead" name="cash-outline" id="transferenciaMenu"></ion-icon>
+                        Prestamos
+                    </a> -->
                 </div>
             </div>
 
-            <!-- NAVBAR -->
+            <!-- lado derecho de pantalla -->
             <div class="w-100">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between border-bottom">
-
+                    <!-- Navbar -->
                     <div class="container">
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -73,7 +63,6 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -91,7 +80,7 @@
                                     </ul>
                                 </li>
                             </ul>
-
+                            <!-- buscar -->
                             <form class="d-flex position-relative">
                                 <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
                                 <button class="btn position-absolute lupaBuscar" type="submit">
@@ -102,10 +91,9 @@
                     </div>
                 </nav>
 
-
                 <!-- Contenido -->
-                <!-- saludo -->
                 <div id="content" class="d-flex flex-column">
+                    <!-- saludo -->
                     <section class="py-3">
                         <div class="container">
                             <div class="row">
@@ -128,24 +116,28 @@
                                         <h5 class="card-title">Cuenta: {{cuenta.number}}</h5>
                                         <h5 class="card-text">Saldo: ${{cuenta.balance}}</h5>
                                     </div>
-
                                     <div class="card-body">
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal" @click="obtenerCuentaOrigen(cuenta.number)">
-                                            Enviar Dinero
-                                        </button>
+                                        <div class="row" id="cardBotton">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" id="enviarDinero"
+                                                @click="obtenerCuentaOrigen(cuenta.number)">
+                                                Enviar Dinero
+                                            </button>
+
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal2">Ver Transferencias
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </section>
                     <!--  -->
-
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <!-- modal header -->
                                 <div class="modal-header">
@@ -153,7 +145,6 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
-
                                 <!-- modal body -->
                                 <div class="modal-body">
                                     <form>
@@ -165,106 +156,86 @@
                                         </div>
 
                                         <div class="mb-3 form-label">
-                                            <label for="cantidadAEnviar" class="form-label">Cantidad</label>
+                                            <label for="cantidadEnviar" class="form-label">Cantidad</label>
                                             <input type="number" class="form-control"
                                                 placeholder="Ingresa la cantidad a enviar" v-model="cantidadAEnviar"
-                                                id="cantidadAEnviar">
+                                                id="cantidadEnviar">
                                         </div>
 
-
-                                        <div class="mb-3 form-label">
-                                            <label for="descripcion" class="form-label">Enviar comentario</label>
-                                            <input type="text" class="form-control" placeholder="comentario"
-                                                v-model="description" id="descripcion">
+                                        <div class="mb-3">
+                                            <label for="message-text" class="col-form-label">Enviar comentario</label>
+                                            <textarea class="form-control" id="message-text"
+                                                v-model="description"></textarea>
                                         </div>
                                     </form>
 
                                 </div>
                                 <!-- modal footer -->
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" @click="transferencia()">Enviar
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+
+                                    <button type="button" class="btn btn-primary" @click="transferencia()"
+                                        id="enviarDinero">Enviar
                                         Transferencia</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <!--  -->
 
-                    <!-- Tabla de movimientos -->
-                    <section class="bg-mix">
-                        <div class="container">
-                            <div class="card rouded-0">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">ID</th>
-                                                    <th scope="col">Tipo de Cuenta</th>
-                                                    <th scope="col">Cantidad</th>
-                                                    <th scope="col">Descripcion</th>
-                                                    <th scope="col">Fecha de la compra</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr v-for="transaction in cuentas.transaction">
-                                                    <th scope="row">{{transaction.id}}</th>
-                                                    <td
-                                                        :class="{'text-danger': transaction.type == 'DEBITO', 'text-success': transaction.type == 'CREDITO'}">
-                                                        {{transaction.type}}</td>
-                                                    <td>{{transaction.cantidad}}</td>
-                                                    <td>{{transaction.descripcion}}</td>
-                                                    <td>{{transaction.date}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                    <!-- MODAL 2 -->
+                    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <!-- modal header -->
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">HomeBanking</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <!-- modal body -->
+                                <div class="modal-body">
+
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Cuenta</th>
+                                                <th scope="col">Cantidad</th>
+                                                <th scope="col">Descripcion</th>
+                                                <th scope="col">Fecha</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="transaccion in transacciones">
+                                                <td
+                                                    :class="{'text-danger': transaccion.type == 'DEBITO', 'text-success': transaccion.type == 'CREDITO'}">
+                                                    {{transaccion.type}}</td>
+                                                <td>{{transaccion.cantidad}}</td>
+                                                <td>{{transaccion.descripcion}}</td>
+                                                <td>{{transaccion.date.substring(0,10)}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <!-- modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+
                                 </div>
                             </div>
                         </div>
-                    </section>
-                    <!-- Contenido -->
-
-
-
-
-
+                    </div>
+                    <!--  -->
                 </div>
             </div>
         </div>
-
-
-
-
-
     </div>
-
-
-
-
-
     </div>
-
-
-
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
 
 

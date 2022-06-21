@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class ClientDTO {
 
     //PROPIEDADES
-    private String firstName,lastName,email; //mientrastato nombre y apellido para iniciar secion
+    private String firstName, lastName, email; //mientrastato nombre y apellido para iniciar secion
     private long id;
     private Set<AccountDTO> accounts = new HashSet<>();
     private Set<ClientLoanDTO> loans = new HashSet<>();
@@ -18,7 +18,6 @@ public class ClientDTO {
     //CONSTRUCTORES
     public ClientDTO() {
     }
-
     public ClientDTO(Client client) {
         this.id = client.getId();
         this.firstName = client.getFirstName();
@@ -33,55 +32,40 @@ public class ClientDTO {
     public long getId() {
         return id;
     }
-
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
     public Set<AccountDTO> getAccounts() {
         return accounts;
     }
-
     public void setAccounts(Set<AccountDTO> accounts) {
         this.accounts = accounts;
     }
-
     public Set<ClientLoanDTO> getLoans() {
         return loans;
     }
-
     public void setLoans(Set<ClientLoanDTO> loans) {
         this.loans = loans;
     }
-
     public Set<CardDTO> getCards() {
         return cards;
     }
-
     public void setCards(Set<CardDTO> cards) {
         this.cards = cards;
     }
-
-
-
 }

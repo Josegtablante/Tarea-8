@@ -1,6 +1,7 @@
 package com.mindhub.homebanking.models;
 
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,15 +14,15 @@ public class Client {
     long id;
 
     //DECLARO LAS VARIABLES(PROPIEDADES) CON LAS QUE VOY A TRABAJAR
-    private String firstName,lastName,email, password;
+    private String firstName, lastName, email, password;
 
-    @OneToMany(mappedBy = "cliente",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
     private Set<Account> accounts = new HashSet<>();
 
-    @OneToMany(mappedBy = "cliente",fetch = FetchType.EAGER) //map = asociar
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER) //map = asociar
     private Set<ClientLoan> clientLoans = new HashSet<>();
 
-    @OneToMany(mappedBy = "cliente",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
     private Set<Card> cards = new HashSet<>();
 
     //CONSTRUCTOR VACIO
@@ -36,7 +37,7 @@ public class Client {
         this.password = password;
     }
 
- //==============================
+    //==============================
 
     // GETTER AND SETTER
     public long getId() {
@@ -83,7 +84,7 @@ public class Client {
         return accounts;
     }
 
-    public void addAccounts (Account account){
+    public void addAccounts(Account account) {
         account.setCliente(this);
         accounts.add(account);
     }
@@ -103,13 +104,6 @@ public class Client {
     public void setCards(Set<Card> cards) {
         this.cards = cards;
     }
-
-
-
-
-
-
-
 
 
 }

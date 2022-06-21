@@ -19,6 +19,7 @@
         rel="stylesheet">
     <!-- css -->
     <link href="../css/custom.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
     <title>HomeBanking</title>
 </head>
 
@@ -30,7 +31,8 @@
             <!-- side bar -->
             <div id="sidebar-container">
                 <div class="logo ">
-                    <h1 class="text-light font-weight-bold">HomeBanking</h1>
+                    <a href="#"><img src="../img/nombre.png" class="homebankLogo" alt="logo"></a>
+                    <!-- <h1 class="text-light font-weight-bold">HomeBanking</h1> -->
                 </div>
                 <div class="menu">
                     <a href="../web/accounts.html" class="d-block text-light p-4">
@@ -44,10 +46,6 @@
                         <ion-icon class="icon lead" name="swap-horizontal-outline"></ion-icon>
                         </ion-icon>Transferencia
                     </a>
-                    <!-- <a href="../web/account.html" class="d-block text-light p-4">
-                        <ion-icon class="icon lead" name="card-outline"></ion-icon>
-                        </ion-icon>Cuenta Autenticada
-                    </a> -->
                 </div>
             </div>
 
@@ -63,25 +61,29 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                            <div>
+                                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
 
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        <ion-icon name="person-outline"></ion-icon>
-                                        <!-- aca va la foto de perfil clases a usar class="img-fluid rounded-circle mr-2     link https://www.youtube.com/watch?v=5SUvT9sjdUE" -->
-                                        {{cliente.firstName}}
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="#">mi perfil</a></li>
-                                        <li><a class="dropdown-item" href="#">Suscripciones</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="#" @click="signOut()">Cerra Sesion</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <ion-icon name="person-outline"></ion-icon>
+                                            <!-- aca va la foto de perfil clases a usar class="img-fluid rounded-circle mr-2     link https://www.youtube.com/watch?v=5SUvT9sjdUE" -->
+                                            {{cliente.firstName}}
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a class="dropdown-item" href="#">mi perfil</a></li>
+                                            <li><a class="dropdown-item" href="#">Suscripciones</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a class="dropdown-item" href="#" @click="signOut()">Cerra Sesion</a>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                </ul>
+                            </div>
 
                             <!-- buscador -->
                             <form class="d-flex position-relative">
@@ -117,7 +119,8 @@
 
                                     <div class="cuentas">
 
-                                            <button type="button" class="btn btn-success btn-lg" @click="crearCuenta()" v-if="cuentas.length < 3">Crear Cuenta</button>
+                                        <button type="button" class="btn btn-success btn-lg" @click="crearCuenta()"
+                                            v-if="cuentas.length < 3">Crear Cuenta</button>
 
 
                                         <div class="row">
@@ -155,6 +158,16 @@
                                 <div class="card-body">
                                     <div class="row">
 
+                                        <div>
+
+                                            <button type="button" class="btn btn-success btn-lg"
+                                                v-if="prestamos.length < 3">
+                                                <a href="../web/loan-application.html" class="loanButton">Loan
+                                                    Application</a>
+                                            </button>
+
+                                        </div>
+
 
                                         <!-- mostramos si tenemos prestamos y usamos v-if  -->
                                         <div class="cardPrestamos">
@@ -175,11 +188,6 @@
                             </div>
                         </div>
                     </section>
-
-
-
-
-
 
                 </div>
 

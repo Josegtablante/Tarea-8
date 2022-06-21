@@ -8,6 +8,7 @@ body{
     background-color: #DFDBE5;
     background-image: url("https://wallpaperaccess.com/full/3063067.png");
     color:#963E7B;
+	/* color: #111B54; */
 
 	margin: 0;
 	padding: 0;
@@ -23,7 +24,8 @@ body{
 .main{
     width: 350px;
 	height: 500px;
-    background-color: rgb(93, 102, 139);
+	background-color: #111B54;
+    /* background-color: rgb(93, 102, 139); */
 	overflow: hidden;
 	box-shadow: 5px 20px 50px #000;
     border-radius: 15px;

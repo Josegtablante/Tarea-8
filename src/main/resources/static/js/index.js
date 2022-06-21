@@ -19,8 +19,8 @@ Vue.createApp({
             .then(data => {
                 this.cliente = data.data //este muestra toda la data o Json
                 this.cuentas = this.cliente.accounts
-                console.log(this.cliente)
-                console.log("hola mundo")
+                // console.log(this.cliente)
+                // console.log("hola mundo")
 
             })
     },

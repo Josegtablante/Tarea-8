@@ -2,6 +2,7 @@ package com.mindhub.homebanking.configurations;
 
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.ClientRepository;
+import com.mindhub.homebanking.services.ClientServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,13 +19,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
     @Autowired
-    ClientRepository clienteRepository;
+    ClientServices clientServices;
 
     @Override
     public void init(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(inputEmail-> {
 
-            Client client= clienteRepository.findByEmail(inputEmail);
+            Client client = clientServices.getClientByEmail(inputEmail);
             if (client != null) {
                 return new User(client.getEmail(), client.getPassword(),
                          AuthorityUtils.createAuthorityList("CLIENT"));

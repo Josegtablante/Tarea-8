@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class CardDTO {
-
     private Long id;
     private Client cliente;
     private CardColor color;

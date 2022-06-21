@@ -4,16 +4,16 @@ import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.models.Transaction;
 import com.mindhub.homebanking.models.TransactionType;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
-import com.mindhub.homebanking.repositories.TransactionRepository;
+import com.mindhub.homebanking.services.AccountServices;
+import com.mindhub.homebanking.services.ClientServices;
+import com.mindhub.homebanking.services.TransactionServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,28 +21,27 @@ import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api")
+//un servlet es un objeto java que pertenece a una clase. Encargado de escuchar y responder peticiones.Al pegarle, se ejecuta un método
 public class TransactionController {
+    @Autowired //inyeccion de dependencia
+    private AccountServices accountServices;
     @Autowired
-    private AccountRepository account;
+    private ClientServices clientServices;
     @Autowired
-    private ClientRepository clientRepository;
-    @Autowired
-    private TransactionRepository transactionRepository;
-
-
-
+    private TransactionServices transactionServices;
 
     /* creacion de cuenta*/
     @Transactional
-    @RequestMapping(path = "/transactions", method = RequestMethod.POST)
+    //anotacion que controla el envio de transacciones . Para decir que este proceso es transaccional tendríamos que revertir todo lo que se ha hecho si una de las operaciones de reserva de vuelo falla.
+    @PostMapping("/transactions") //
     public ResponseEntity<Object> registerTransaction(
             @RequestParam double cantidad, @RequestParam String description,
             @RequestParam String originAccount, @RequestParam String destinationAccount,
             Authentication authentication) {
 
-        Client client = clientRepository.findByEmail(authentication.getName()); //email cliente autenticado
-        Account cuentaOrigen = account.findByNumber(originAccount); //cuenta de origen
-        Account cuentaDestinatario = account.findByNumber(destinationAccount); //cuenta del destinatario
+        Client client = clientServices.getClientCurrent(authentication); //email cliente autenticado
+        Account cuentaOrigen = accountServices.findByNumber(originAccount);//cuenta de origen
+        Account cuentaDestinatario = accountServices.findByNumber(destinationAccount);//cuenta del destinatario
 
         //verificaciones
         //por si alguno de los campos esta vacio
@@ -55,19 +54,22 @@ public class TransactionController {
         }
         //que la cuenta de origen exista
         if (cuentaOrigen == null) {
-            return new ResponseEntity<>("La cuenta no existe",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("La cuenta no existe", HttpStatus.BAD_REQUEST);
         }
         //que la cuenta de origen pertenesca al cliente autentificado
-        if (!client.getAccounts().contains(cuentaOrigen) ){ //revisar, esta media extraña  cuentaOrigen.getId() == authentication .getId()
-            return new ResponseEntity<>("La cuenta no pertenece al cliente auntentificado",HttpStatus.BAD_REQUEST);
+        if (!client.getAccounts().contains(cuentaOrigen)) { //revisar, esta media extraña  cuentaOrigen.getId() == authentication .getId()
+            return new ResponseEntity<>("La cuenta no pertenece al cliente auntentificado", HttpStatus.BAD_REQUEST);
         }
         //que exista la cuenta de destino
-        if (cuentaDestinatario == null){ //revisar, esta media extraña
-            return new ResponseEntity<>("La cuenta destino no existe",HttpStatus.BAD_REQUEST);
+        if (cuentaDestinatario == null) { //revisar, esta media extraña
+            return new ResponseEntity<>("La cuenta destino no existe", HttpStatus.BAD_REQUEST);
         }
         //que la cuenta de origen tenga el monto disponible.
-        if (cuentaOrigen.getBalance() < cantidad){
-            return new ResponseEntity<>("La cuenta de origen tiene un saldo menor al que se desea enviar",HttpStatus.BAD_REQUEST);
+        if (cuentaOrigen.getBalance() < cantidad) {
+            return new ResponseEntity<>("La cuenta de origen tiene un saldo menor al que se desea enviar", HttpStatus.BAD_REQUEST);
+        }
+        if (cantidad <= 0) {
+            return new ResponseEntity<>("No puedes ingresar un dato menor a cero", HttpStatus.BAD_REQUEST);
         }
 
         //A la cuenta de origen se le restará el monto indicado en la petición y a la cuenta de destino se le sumará el mismo monto.
@@ -75,31 +77,18 @@ public class TransactionController {
         double balanceCredito = cuentaDestinatario.getBalance() + cantidad;
 
         cuentaOrigen.setBalance(balanceDebito);
-        account.save(cuentaOrigen);
+        accountServices.getSaveAccount(cuentaOrigen);
 
         cuentaDestinatario.setBalance(balanceCredito);
-        account.save(cuentaDestinatario);
+        accountServices.getSaveAccount(cuentaDestinatario);
 
         // Se deben crear dos transacciones, una con el tipo de transacción “DEBIT” asociada a la cuenta de origen y la otra con el tipo de transacción “CREDIT” asociada a la cuenta de destino.
-        Transaction debitTransaction = transactionRepository.save(new Transaction(TransactionType.DEBITO,cantidad,description, LocalDateTime.now().plusDays(5),cuentaOrigen));
-        Transaction creditTransaction = transactionRepository.save(new Transaction(TransactionType.CREDITO,cantidad,description, LocalDateTime.now().plusDays(5),cuentaDestinatario));
-
-        return new ResponseEntity<>("transaccion creada con exito",HttpStatus.CREATED);
-
-
-
-
-
-
-
+        Transaction debitTransaction = new Transaction(TransactionType.DEBIT, cantidad, description, LocalDateTime.now().plusDays(5), cuentaOrigen);
+        transactionServices.saveTransaction(debitTransaction);
+        Transaction creditTransaction = new Transaction(TransactionType.CREDIT, cantidad, description, LocalDateTime.now().plusDays(5), cuentaDestinatario);
+        transactionServices.saveTransaction(creditTransaction);
+        return new ResponseEntity<>("transaccion creada con exito", HttpStatus.CREATED);
     }
-
-
-
-
-
-
-
 }
 
 

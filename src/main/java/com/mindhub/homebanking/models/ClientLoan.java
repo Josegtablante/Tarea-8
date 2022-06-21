@@ -3,10 +3,11 @@ package com.mindhub.homebanking.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class ClientLoan {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -16,12 +17,12 @@ public class ClientLoan {
     private Integer payments; //pago de cuotas
 
     //ESTO Genera la relacicion entre cliente y loan con clientLoan, y asi evitar que la relacion muchos a muchos se vuelva un embole
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="cliente_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cliente_id")
     private Client cliente;
 
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="loan_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "loan_id")
     private Loan loan;
 
     public ClientLoan() {

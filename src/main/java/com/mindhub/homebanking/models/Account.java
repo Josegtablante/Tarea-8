@@ -30,8 +30,7 @@ public class Account {
     @OneToMany(mappedBy = "account",fetch = FetchType.EAGER) //PREGUNTAR
     private Set<Transaction> transactions = new HashSet<>(); //tengo una set de propiedades llamadas Transaction de la clase account
 
-        //CONSTRUCTORES
-
+    //CONSTRUCTORES
     public Account() {
     }
 
@@ -43,9 +42,7 @@ public class Account {
         //capas falte un set de transaction
     }
 
-
     //GETTER AND SETTER
-
     public long getId() {
         return id;
     }
@@ -86,6 +83,5 @@ public class Account {
     public void setTransactions(Set<Transaction> transactions) {
         this.transactions = transactions;
     }
-
 
 }

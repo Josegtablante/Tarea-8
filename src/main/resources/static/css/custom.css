@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 :root {
     --primary: #111B54;
     --light: rgb(240, 239, 239);
@@ -7,7 +9,9 @@
 
 body {
     overflow: hidden;
-    font-family: 'Muli', sans-serif;
+    font-family:'Montserrat', sans-serif !important;
+    /* font-; */
+    /* font-family: 'Muli', sans-serif; */
     font-weight: 300;
     color: var(--primary);
 }
@@ -23,14 +27,39 @@ body {
 
 #sidebar-container .menu {
     width: 18rem;
+    text-decoration: none;
 }
+
+a{
+    text-decoration: none;
+}
+
+.homebankLogo{
+width: 288px; 
+height: 85px;
+}
+
 
 a:hover {
     text-decoration: none;
+    font-size: 20px;
+    background-color:#4355b8fa;
+    border-radius: 8px;
 }
 
 .icon {
     margin-right: 10px;
+    width: 35px;
+    height: 35px;  
+}
+
+.loanButton{
+color: #efefef;
+text-decoration: none;
+}
+
+.loanButton:hover{
+   text-decoration: none;
 }
 
 /* navbar */
@@ -58,15 +87,16 @@ a:hover {
 
 .stat {
     border-right: 1px solid var(--primary);
-}
+    }
 
 .bg-mix {
      background: linear-gradient(180deg, var(--light) 50%, var(--grey) 0);
 }
 
+/*
 .cardPrestamos{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
-
+*/

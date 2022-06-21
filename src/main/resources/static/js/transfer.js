@@ -4,19 +4,15 @@ Vue.createApp({
         return {
             cliente: [], //PROPIEDADES
             cuentas: [],
-            cantidades: [],
-            ballance: [],
-            number: [],
-            prestamos: [],
-            transfer: [],
-
             tarjetas: [],
+            prestamos: [],
+            transacciones: [].sort(function(a, b){return b - a}),
+
             cardHolder: [],
 
             type: "",
             cardColor: "",
 
-            misCuentas: true,
             cantidad: '',
             name: '',
 
@@ -38,17 +34,18 @@ Vue.createApp({
                 this.cuentas = this.cliente.accounts
                 this.prestamos = this.cliente.loans
                 this.tarjetas = this.cliente.cards
-                console.log(this.cliente)
-                console.log(this.cuentas)
-                // this.trasfer = this.cuentas[2].transactions
-                // console.log(this.trasfer)
+                this.transacciones = this.cuentas[0].transactions //preguntar como recorrer cuentas para mostrar las transacciones
+                // console.log(this.cliente)
+                // console.log(this.cuentas)
+                // console.log(this.cuentas)
+                // console.log(this.transacciones)
             })
     },
 
     methods: {
         signOut() {
             axios.post('/api/logout')
-                .then(response => console.log('signed out!!!'))
+//                .then(response => console.log('signed out!!!'))
                 .then(response => window.location.href = "http://localhost:8080/web/index.html")
         },
 
@@ -74,9 +71,9 @@ Vue.createApp({
 
 
     computed: {
-        comprobar() {
-            return this.cantidad.length > 2 ? true : false
-        }
+        // comprobar() {
+        //     return this.cantidad.length > 2 ? true : false
+        // }
 
     },
 
