@@ -38,7 +38,8 @@ public class ClientController {
         return clientServices.getClientDTO(id); //map es asociar
     }
 
-    @PostMapping("/clients")
+//    @PostMapping("/clients")
+    @RequestMapping(path = "/clients", method = RequestMethod.POST)
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
             @RequestParam String email, @RequestParam String password) {

@@ -21,27 +21,29 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
 
+                .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
+
+                .antMatchers(HttpMethod.GET, "/api/clients").permitAll()
+
                 .antMatchers("/h2-console/**").hasAuthority("ADMIN")
 
-                .antMatchers("/web/index.html","/js/**","web/index.js","css/**").permitAll()
+                .antMatchers("/web/index.html", "/js/**", "web/index.js", "css/**").permitAll()
 
-                .antMatchers("/web/**").hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers("/web/**").hasAnyAuthority("CLIENT", "ADMIN")
 
                 .antMatchers("/api/**").hasAnyAuthority("CLIENT")
 
-                .antMatchers(HttpMethod.POST,"/transactions").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/transactions").hasAuthority("CLIENT")
 
-                .antMatchers(HttpMethod.GET,"/api/loan").hasAnyAuthority("ADMIN","CLIENT")
+                .antMatchers(HttpMethod.GET, "/api/loan").hasAnyAuthority("ADMIN", "CLIENT")
 
-                .antMatchers(HttpMethod.POST,"/api/loans").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/loans").hasAuthority("CLIENT")
 
-                .antMatchers(HttpMethod.GET,"/api/loans").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.GET, "/api/loans").hasAuthority("CLIENT")
 
-                .antMatchers(HttpMethod.POST,"/api/clients/current/accounts","/api/clients/current/cards").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards").hasAuthority("CLIENT")
 
-                .antMatchers(HttpMethod.GET,"/api/clients/current/accounts").hasAuthority("CLIENT")
-
-                .antMatchers(HttpMethod.POST,"/api/clients").permitAll();
+                .antMatchers(HttpMethod.GET, "/api/clients/current/accounts").hasAuthority("CLIENT");
 
 
         http.formLogin()
@@ -58,7 +60,6 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
         // turn off checking for CSRF tokens
 
         http.csrf().disable();
-
 
 
         //disabling frameOptions so h2-console can be accessed
@@ -94,9 +95,6 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
         }
 
     }
-
-
-
 
 
 }

@@ -15,14 +15,14 @@ Vue.createApp({
 
 
     created() {
-        axios.get('http://localhost:8080/api/clients')
-            .then(data => {
-                this.cliente = data.data //este muestra toda la data o Json
-                this.cuentas = this.cliente.accounts
-                // console.log(this.cliente)
-                // console.log("hola mundo")
+        // axios.get('http://localhost:8080/api/clients')
+        //     .then(data => {
+        //         this.cliente = data.data //este muestra toda la data o Json
+        //         this.cuentas = this.cliente.accounts
+        //         console.log(this.cliente)
+        //         console.log("hola mundo")
 
-            })
+        //     })
     },
 
     methods: {
